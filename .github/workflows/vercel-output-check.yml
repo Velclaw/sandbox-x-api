@@ -1,0 +1,30 @@
+name: Vercel Static Output Check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - v0/create-sandbox-x-api-repository-9503a7aa
+
+permissions:
+  contents: read
+
+jobs:
+  verify-static-output:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build package and static page
+        run: npm run build
+      - name: Verify Vercel output directory
+        run: |
+          test -s dist/index.html
+          test -s dist/index.js
+          echo "Verified: dist/index.html and dist/index.js exist and are non-empty."
