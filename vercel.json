@@ -1,0 +1,4 @@
+{
+  "buildCommand": "bun run build && node -e \"require('node:fs').copyFileSync('index.html','dist/index.html')\"",
+  "outputDirectory": "dist"
+}
