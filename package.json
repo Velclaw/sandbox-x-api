@@ -52,7 +52,7 @@
   "files": ["dist", "README.md", "LICENSE"],
   "scripts": {
     "clean": "node -e \"import('node:fs').then(fs=>fs.rmSync('dist',{recursive:true,force:true}))\"",
-    "build": "npm run clean && tsc -p tsconfig.json && node -e \"import('node:fs').then(fs=>fs.copyFileSync('index.html','dist/index.html'))\"",
+    "build": "npm run clean && tsc -p tsconfig.json && cp index.html dist/index.html",
     "test": "npm run build && node --test tests/*.test.mjs",
     "test:coverage": "npm run build && c8 --all --include=dist --exclude=dist/**/*.d.ts --reporter=text --reporter=lcov --reporter=html node --test tests/*.test.mjs",
     "prepack": "npm run build",
